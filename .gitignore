@@ -143,5 +143,5 @@ dist
 
 # Other
 config.json
-
+userlist.json
 # End of https://www.toptal.com/developers/gitignore/api/node
