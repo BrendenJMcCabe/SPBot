@@ -299,8 +299,14 @@ client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.type !== InteractionType.ModalSubmit) return;
 
 	if(interaction.customId === 'nickmodal') {
-		var target = await interaction.guild.members.fetch({user: interaction.fields.getTextInputValue('targetid'), force: true});
-		target.setNickname(await interaction.fields.getTextInputValue('nickname'), `${interaction.user.displayName} renamed this user using their server points!`);
+		
+			var target = await interaction.guild.members.fetch({user: interaction.fields.getTextInputValue('targetid'), force: true});
+		
+		try{
+			target.setNickname(await interaction.fields.getTextInputValue('nickname'), `${interaction.user.displayName} renamed this user using their server points!`);
+		} catch(e){
+			await interaction.reply({content: `I don't have permissions to change this users nickname`, ephemeral:true})
+		}
 		await interaction.reply({content: `${target.user} just got a new nickname from ${interaction.user.displayName}! You can now call them ${interaction.fields.getTextInputValue('nickname')}`});
 	}
 })
