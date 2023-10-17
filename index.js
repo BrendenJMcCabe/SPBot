@@ -256,6 +256,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 
 		try {
+			console.log(interaction.values[0]);
 			// Modal Creation
 			const modal = new ModalBuilder()
 				.setCustomId('nickmodal')
@@ -276,8 +277,9 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setValue(interaction.values[0])
 
 			const row1 = new ActionRowBuilder().addComponents(text1Input);
+			const row2 = new ActionRowBuilder().addComponents(text2Input);
 			
-			modal.addComponents(row1);
+			modal.addComponents(row1, row2);
 
 			await interaction.showModal(modal);
 		} catch (e) {
