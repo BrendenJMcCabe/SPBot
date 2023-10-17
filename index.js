@@ -267,6 +267,8 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setStyle(TextInputStyle.Short)
 				.setValue("username");
 
+			const row1 = new ActionRowBuilder().addComponents(bid1Input);
+			
 			modal.addComponents(row1);
 
 			await interaction.showModal(modal);
