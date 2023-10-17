@@ -255,6 +255,9 @@ client.on(Events.InteractionCreate, async interaction => {
 			return;
 		}
 
+		user.points -= cost;
+		pot.points += cost;
+
 		try {
 			console.log(interaction.values[0]);
 			// Modal Creation
@@ -286,6 +289,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		} catch (e) {
 			await console.log(e)
 		}
+
+		SaveUsers(userlist)
 	}
 })
 
