@@ -289,7 +289,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		} catch (e) {
 			await console.log(e)
 		}
-		if(!commandCompleted){
+		if(commandCompleted){
 			SaveUsers(userlist)
 		} else{
 			commandCompleted = true;
@@ -309,6 +309,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		try{
 			target.setNickname(await interaction.fields.getTextInputValue('nickname'), `${interaction.user.displayName} renamed this user using their server points!`);
 		} catch(e){
+			console.log(e)
 			commandCompleted = false;
 			await interaction.reply({content: `I don't have permissions to change this users nickname`, ephemeral:true})
 			return;
