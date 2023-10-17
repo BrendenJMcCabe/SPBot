@@ -279,6 +279,8 @@ client.on(Events.InteractionCreate, async interaction => {
 			const row1 = new ActionRowBuilder().addComponents(text1Input);
 			const row2 = new ActionRowBuilder().addComponents(text2Input);
 			
+
+			console.log("made it here lol");
 			modal.addComponents(row1, row2);
 
 			await interaction.showModal(modal);
