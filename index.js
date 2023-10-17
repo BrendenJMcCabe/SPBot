@@ -311,7 +311,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		} catch(e){
 			console.log(e)
 			commandCompleted = false;
-			await interaction.reply({content: `I don't have permissions to change this users nickname`, ephemeral:true})
+			await interaction.reply({content: `I don't have permissions to change this user's nickname`, ephemeral:true})
 			return;
 		}
 		await interaction.reply({content: `${target.user} just got a new nickname from ${interaction.user.displayName}! You can now call them ${interaction.fields.getTextInputValue('nickname')}`});

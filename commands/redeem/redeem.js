@@ -62,7 +62,7 @@ module.exports = {
 
 		const response = await interaction.reply({ content: `>>> Select a reward to redeem.\n**Points: ${user.points}**` , components: [row1, row2], ephemeral: true});
 		try {
-			const redemption = await response.awaitMessageComponent({ time: (interaction.options.getString("timer") ? interaction.options.getString("timer") * 1000 : 60000) });
+			const redemption = await response.awaitMessageComponent();
 			
 			if(redemption.customId == 'mute'){
 				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen. Processing request...`, components: [] });
