@@ -260,7 +260,6 @@ client.on(Events.InteractionCreate, async interaction => {
 		pot.points += cost;
 
 		try {
-			console.log(interaction.values[0]);
 			// Modal Creation
 			const modal = new ModalBuilder()
 				.setCustomId('nickmodal')
