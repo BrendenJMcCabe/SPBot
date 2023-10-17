@@ -4,7 +4,7 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, InteractionType} = require('discord.js');
 const { token } = require('./config.json');
 let pointGen = { on: false };
-const commandCompleted = true;
+let commandCompleted = true;
 
 
 // Create a new client instance
