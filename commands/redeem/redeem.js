@@ -129,7 +129,7 @@ module.exports = {
 				const menuRow = new ActionRowBuilder()
 					.addComponents(await UsersWithPointsSelector(interaction, "nicktarget"));
 
-				await redemption.reply({content: `>>> Cost: 500 Points \nChoose a user to change their server nickname!`, components: [menuRow], ephemeral: true});
+				await redemption.reply({content: `>>> Cost: 1000 Points \nChoose a user to change their server nickname!`, components: [menuRow], ephemeral: true});
 				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
 			}
 

@@ -248,7 +248,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	if(interaction.customId === 'nicktarget'){
-		var cost = 500;
+		var cost = 1000;
 
 		if(user.points < cost){
 			pointReject(interaction, user)
@@ -280,7 +280,6 @@ client.on(Events.InteractionCreate, async interaction => {
 			const row2 = new ActionRowBuilder().addComponents(text2Input);
 			
 
-			console.log("made it here lol");
 			modal.addComponents(row1, row2);
 
 			await interaction.showModal(modal);
@@ -297,12 +296,12 @@ client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.customId === 'nickmodal') {
 		var target = await interaction.guild.members.fetch({user: interaction.fields.getTextInputValue('targetid'), force: true});
 		target.setNickname(await interaction.fields.getTextInputValue('nickname'));
-		await interaction.reply({content: `Text submitted: ${interaction.fields.getTextInputValue('nickname')}`});
+		await interaction.reply({content: `${target.user} just got a new nickname from ${interaction.user.displayName}! You can now call them ${interaction.fields.getTextInputValue('nickname')}`});
 	}
 })
 
 async function pointReject(interaction, user){
-	await interaction.reply({content: `You do not have enough points for this command! Cost: 500. Your Points: ${user.points}`, ephemeral:true})
+	await interaction.reply({content: `You do not have enough points for this command! Your Points: ${user.points}`, ephemeral:true})
 }
 
 async function SaveUsers(userJson){
