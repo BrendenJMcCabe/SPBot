@@ -269,7 +269,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setMaxLength(32)
 				.setMinLength(3);
 
-			const row1 = new ActionRowBuilder().addComponents(bid1Input);
+			const row1 = new ActionRowBuilder().addComponents(text1Input);
 			
 			modal.addComponents(row1);
 
