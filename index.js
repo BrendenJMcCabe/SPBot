@@ -261,7 +261,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setCustomId('nickmodal')
 				.setTitle(`Change target nickname`);
 
-			const bid1Input = new TextInputBuilder()
+			const text1Input = new TextInputBuilder()
 				.setCustomId("nickname")	
 				.setLabel("Enter new nickname for target: ")
 				.setStyle(TextInputStyle.Short)
@@ -285,6 +285,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.type !== InteractionType.ModalSubmit) return;
 	
 	if(interaction.customId === 'nickmodal') {
+		interaction.user.setNickname(interaction.fields.getTextInputValue('nickname'));
 		await interaction.reply({content: `Text submitted: ${interaction.fields.getTextInputValue('nickname')}`});
 	}
 })
