@@ -256,26 +256,20 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 
 		try {
-			await interaction.reply(`test`);
+			// Modal Creation
+			const modal = new ModalBuilder()
+				.setCustomId('nickmodal')
+				.setTitle(`Change target nickname`);
 
-			const confirmation = await interaction.awaitMessageComponent({ time: 60000});
-			
-			if(confirmation.customId == 'bid'){
-				// Modal Creation
-				const modal = new ModalBuilder()
-					.setCustomId('nickmodal')
-					.setTitle(`Change target nickname`);
+			const bid1Input = new TextInputBuilder()
+				.setCustomId("nickname")	
+				.setLabel("Enter new nickname for target: ")
+				.setStyle(TextInputStyle.Short)
+				.setValue("username");
 
-				const bid1Input = new TextInputBuilder()
-					.setCustomId("nickname")	
-					.setLabel("Enter new nickname for target: ")
-					.setStyle(TextInputStyle.Short)
-					.setValue("username");
+			modal.addComponents(row1);
 
-				modal.addComponents(row1);
-
-				await confirmation.showModal(modal);
-			}
+			await interaction.showModal(modal);
 		} catch (e) {
 			await console.log(e)
 		}
