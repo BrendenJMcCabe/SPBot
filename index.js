@@ -265,7 +265,9 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setCustomId("nickname")	
 				.setLabel("Enter new nickname for target: ")
 				.setStyle(TextInputStyle.Short)
-				.setValue("username");
+				.setValue("username")
+				.setMaxLength(32)
+				.setMinLength(3);
 
 			const row1 = new ActionRowBuilder().addComponents(bid1Input);
 			
@@ -280,12 +282,11 @@ client.on(Events.InteractionCreate, async interaction => {
 
 
 client.on(Events.InteractionCreate, async interaction => {
-	if(interaction.isModalSubmit()) return;
+	if(interactiontype !== InteractionType.isModalSubmit()) return;
 	
 	if(interaction.customId === 'nickmodal') {
 		await interaction.reply({content: `Just a test for now lmao`});
 	}
-	
 })
 
 async function pointReject(interaction, user){
