@@ -272,7 +272,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 			const text2Input = new TextInputBuilder()
 				.setCustomId("targetid")
-				.setLabel("Target (DO NOT CHANGE)")
+				.setLabel("DO NOT CHANGE")
 				.setStyle(TextInputStyle)
 				.setValue(interaction.values[0])
 
