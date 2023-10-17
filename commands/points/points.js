@@ -11,7 +11,7 @@ module.exports = {
 		var userlist = JSON.parse(fs.readFileSync('commands/points/userlist.json', 'utf-8'));
 		var user = userlist.users.find(o => o.name == interaction.user.id);
 		try{
-			await interaction.reply({ content: `>>> ${interaction.user.username}, you have ${user.points} points!!`, ephemeral: true})
+			await interaction.reply({ content: `>>> Test! ${interaction.user.username}, you have ${user.points} points!!`, ephemeral: true})
 		} catch{
 			await interaction.reply({ content: `>>> Profile not found. Use /createprofile to make a profile and start earning points!`, ephemeral: true});
 		}
