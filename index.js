@@ -275,7 +275,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				await confirmation.showModal(modal);
 			}
 		} catch (e) {
-			await interaction.editReply({ embeds: [gambaEmbed], content: 'Bids have been closed', components: [] });
+			await interaction.editReply('Timed out.');
 		}
 	}
 })
