@@ -285,7 +285,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.type !== InteractionType.ModalSubmit) return;
 	
 	if(interaction.customId === 'nickmodal') {
-		await interaction.reply({content: `Text submitted: ${interaction.fields.getTextInputValues('nickname')}`});
+		await interaction.reply({content: `Text submitted: ${interaction.fields.getTextInputValue('nickname')}`});
 	}
 })
 
