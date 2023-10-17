@@ -42,11 +42,16 @@ module.exports = {
 			.setLabel("Push-Ups")
 			.setStyle(ButtonStyle.Primary);
 
+		const opt7Button = new ButtonBuilder()
+			.setCustomId('nickn')
+			.setLabel("Change Nickname")
+			.setStyle(ButtonStyle.Primary);
+
 		const row1 = new ActionRowBuilder()
 			.addComponents([opt1Button, opt2Button, opt3Button]);
 
 		const row2 = new ActionRowBuilder()
-			.addComponents([opt4Button, opt5Button, opt6Button]);
+			.addComponents([opt4Button, opt5Button, opt6Button, opt7Button]);
 
 		var user = userlist.users.find(o => o.name == interaction.user.id);
 
@@ -115,6 +120,16 @@ module.exports = {
 					.addComponents(await UsersWithPointsSelector(interaction, "pushupstarget"));
 
 				await redemption.reply({content: `>>> Cost: 1000 Points \nChoose a user to do 10 push-ups!`, components: [menuRow], ephemeral: true});
+				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
+			}
+
+			if(redemption.customId == 'nickn'){
+				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen. Processing request...`, components: [] });
+
+				const menuRow = new ActionRowBuilder()
+					.addComponents(await UsersWithPointsSelector(interaction, "nicktarget"));
+
+				await redemption.reply({content: `>>> Cost: 500 Points \nChoose a user to change their server nickname!`, components: [menuRow], ephemeral: true});
 				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
 			}
 

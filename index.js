@@ -246,6 +246,48 @@ client.on(Events.InteractionCreate, async interaction => {
 		SaveUsers(userlist)
 
 	}
+
+	if(interaction.customId === 'nicktarget'){
+		var cost = 500;
+
+		if(user.points < cost){
+			pointReject(interaction, user)
+			return;
+		}
+
+		try {
+			const confirmation = await response.awaitMessageComponent({ time: (interaction.options.getString("timer") ? interaction.options.getString("timer") * 1000 : 60000) });
+			
+			if(confirmation.customId == 'bid'){
+				// Modal Creation
+				const modal = new ModalBuilder()
+					.setCustomId('nickmodal')
+					.setTitle(`Change target nickname`);
+
+				const bid1Input = new TextInputBuilder()
+					.setCustomId("nickname")	
+					.setLabel("Enter new nickname for target: ")
+					.setStyle(TextInputStyle.Short)
+					.setValue("username");
+
+				modal.addComponents(row1);
+
+				await confirmation.showModal(modal);
+			}
+		} catch (e) {
+			await interaction.editReply({ embeds: [gambaEmbed], content: 'Bids have been closed', components: [] });
+		}
+	}
+})
+
+
+client.on(Events.InteractionCreate, async interaction => {
+	if(interaction.isModalSubmit()) return;
+	
+	if(interaction.customId === 'nickmodal') {
+		await interaction.reply({content: `Just a test for now lmao`});
+	}
+	
 })
 
 async function pointReject(interaction, user){
