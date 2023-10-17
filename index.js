@@ -269,6 +269,12 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setMaxLength(32)
 				.setMinLength(3);
 
+			const text2Input = new TextInputBuilder()
+				.setCustomId("targetid")
+				.setLabel("Target (DO NOT CHANGE)")
+				.setStyle(TextInputStyle)
+				.setValue(interaction.values[0])
+
 			const row1 = new ActionRowBuilder().addComponents(text1Input);
 			
 			modal.addComponents(row1);
@@ -285,7 +291,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.type !== InteractionType.ModalSubmit) return;
 
 	if(interaction.customId === 'nickmodal') {
-		var target = await interaction.guild.members.fetch({user: interaction.user.id, force: true});
+		var target = await interaction.guild.members.fetch({user: interaction.fields.getTextInputValue('targetid'), force: true});
 		target.setNickname(await interaction.fields.getTextInputValue('nickname'));
 		await interaction.reply({content: `Text submitted: ${interaction.fields.getTextInputValue('nickname')}`});
 	}
