@@ -4,6 +4,7 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, InteractionType} = require('discord.js');
 const { token } = require('./config.json');
 let pointGen = { on: false };
+const commandCompleted = true;
 
 
 // Create a new client instance
@@ -289,8 +290,12 @@ client.on(Events.InteractionCreate, async interaction => {
 		} catch (e) {
 			await console.log(e)
 		}
-
-		SaveUsers(userlist)
+		if(!commandCompleted){
+			SaveUsers(userlist)
+		} else{
+			commandCompleted = true;
+			return;
+		}
 	}
 })
 
@@ -305,6 +310,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		try{
 			target.setNickname(await interaction.fields.getTextInputValue('nickname'), `${interaction.user.displayName} renamed this user using their server points!`);
 		} catch(e){
+			commandCompleted = false;
 			await interaction.reply({content: `I don't have permissions to change this users nickname`, ephemeral:true})
 		}
 		await interaction.reply({content: `${target.user} just got a new nickname from ${interaction.user.displayName}! You can now call them ${interaction.fields.getTextInputValue('nickname')}`});
