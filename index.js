@@ -258,7 +258,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		try {
 			await interaction.reply(`test`);
 
-			const confirmation = await interaction.awaitMessageComponent({ time: (interaction.options.getString("timer") ? interaction.options.getString("timer") * 1000 : 60000) });
+			const confirmation = await interaction.awaitMessageComponent({ time: 60000});
 			
 			if(confirmation.customId == 'bid'){
 				// Modal Creation
