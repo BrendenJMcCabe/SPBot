@@ -282,7 +282,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 
 client.on(Events.InteractionCreate, async interaction => {
-	if(interactiontype !== InteractionType.isModalSubmit()) return;
+	if(interaction.type !== InteractionType.isModalSubmit()) return;
 	
 	if(interaction.customId === 'nickmodal') {
 		await interaction.reply({content: `Just a test for now lmao`});
