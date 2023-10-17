@@ -277,7 +277,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				await confirmation.showModal(modal);
 			}
 		} catch (e) {
-			await interaction.editReply('Timed out.');
+			await console.log(e)
 		}
 	}
 })
