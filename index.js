@@ -295,7 +295,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if(interaction.customId === 'nickmodal') {
 		var target = await interaction.guild.members.fetch({user: interaction.fields.getTextInputValue('targetid'), force: true});
-		target.setNickname(await interaction.fields.getTextInputValue('nickname'));
+		target.setNickname(await interaction.fields.getTextInputValue('nickname'), `${interaction.user.displayName} renamed this user using their server points!`);
 		await interaction.reply({content: `${target.user} just got a new nickname from ${interaction.user.displayName}! You can now call them ${interaction.fields.getTextInputValue('nickname')}`});
 	}
 })
