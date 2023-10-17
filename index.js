@@ -283,9 +283,10 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.type !== InteractionType.ModalSubmit) return;
-	
+
 	if(interaction.customId === 'nickmodal') {
-		interaction.user.setNickname(interaction.fields.getTextInputValue('nickname'));
+		var target = await interaction.guild.members.fetch({user: interaction.user.id, force: true});
+		target.setNickname(await interaction.fields.getTextInputValue('nickname'));
 		await interaction.reply({content: `Text submitted: ${interaction.fields.getTextInputValue('nickname')}`});
 	}
 })
