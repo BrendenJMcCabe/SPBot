@@ -119,7 +119,7 @@ module.exports = {
 				const menuRow = new ActionRowBuilder()
 					.addComponents(await UsersWithPointsSelector(interaction, "pushupstarget"));
 
-				await redemption.reply({content: `>>> Cost: 1000 Points \nChoose a user to do 10 push-ups!`, components: [menuRow], ephemeral: true});
+				await redemption.reply({content: `>>> Cost: 1500 Points \nChoose a user to do 10 push-ups!`, components: [menuRow], ephemeral: true});
 				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
 			}
 

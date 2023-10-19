@@ -226,7 +226,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	if(interaction.customId === 'pushupstarget') {
-		var cost = 1000;
+		var cost = 1500;
 
 		if(user.points < cost){
 			pointReject(interaction, user)
