@@ -84,73 +84,65 @@ client.on(Events.InteractionCreate, async interaction => {
 	var userlist = JSON.parse(fs.readFileSync('commands/points/userlist.json', 'utf-8'));
 	var user = userlist.users.find(o => o.name == interaction.user.id);
 	var pot = userlist.users.find(o => o.name == "1");
-	if(interaction.customId === 'mutetarget') {
 
-		if(user.points < 500){
-			await interaction.reply({content: `You do not have enough points for this command! Cost: 500. Your Points: ${user.points}`, ephemeral:true})
-			return;
-		}
-
-		user.points -= 500;
-		pot.points += 500;
-
-		var target = await interaction.guild.members.fetch({user: interaction.values[0], force: true});
-
-		if(target.voice.channelId == null){
-			await interaction.reply({content: `${target.user.displayName} is not in a voice channel and can not be server muted.`, ephemeral:true})
-			return;
-		}
-
-		await interaction.reply({content: `Muting user ${target.user.displayName} for 60 seconds!`, ephemeral: true});
-		await target.send({content: `${interaction.user.displayName} has muted you for 60 seconds using their server points!\n[Note: leaving the voice channel before your 60 seconds are up may prevent you from being unmuted. Blame Discord's wonky ah api, not me.]`})
-		target.voice.setMute(true, `${interaction.user.displayName} has muted this person for 60 seconds using their server points!`);
-
-		userlistString = await JSON.stringify(userlist);
-		fs.writeFileSync('commands/points/userlist.json', userlistString, (err) => {
-			if(err)
-				console.log (err)
-			else {
-				console.log("User points updated successfully!");
+	switch(interaction.customId) {
+		case('mutetarget'):
+			cost = 500;
+			if(user.points < cost){
+				pointReject(interaction, user);
+				return;
 			}
-		});
 
-		setTimeout(function(){
-			target.voice.setMute(false);
-			interaction.editReply({content: `60 seconds are up! Unmuting user ${target.user.displayName}.`})
-		}, 60000)
+			user.points -= 500;
+			pot.points += 500;
 
+			var target = await interaction.guild.members.fetch({user: interaction.values[0], force: true});
 
-	}
+			if(target.voice.channelId == null){
+				await interaction.reply({content: `${target.user.displayName} is not in a voice channel and can not be server muted.`, ephemeral:true})
+				return;
+			}
 
-	if(interaction.customId === 'deafentarget') {
-		var cost = 500;
+			await interaction.reply({content: `Muting user ${target.user.displayName} for 60 seconds!`, ephemeral: true});
+			await target.send({content: `${interaction.user.displayName} has muted you for 60 seconds using their server points!\n[Note: leaving the voice channel before your 60 seconds are up may prevent you from being unmuted. Blame Discord's wonky ah api, not me.]`})
+			target.voice.setMute(true, `${interaction.user.displayName} has muted this person for 60 seconds using their server points!`);
 
-		if(user.points < cost){
-			pointReject(interaction, user)
-			return;
-		}
+			SaveUsers(userlist);
 
-		user.points -= cost;
-		pot.points += cost;
+			setTimeout(function(){
+				target.voice.setMute(false);
+				interaction.editReply({content: `60 seconds are up! Unmuting user ${target.user.displayName}.`})
+			}, 60000)
+			
+		
+		case('deafentarget'):
+			var cost = 500;
 
-		var target = await interaction.guild.members.fetch({user: interaction.values[0], force: true});
+			if(user.points < cost){
+				pointReject(interaction, user)
+				return;
+			}
 
-		if(target.voice.channelId == null){
-			await interaction.reply({content: `${target.user.displayName} is not in a voice channel and can not be server muted.`, ephemeral:true})
-			return;
-		}
+			user.points -= cost;
+			pot.points += cost;
 
-		await interaction.reply({content: `Deafening user ${target.user.displayName} for 60 seconds!`, ephemeral: true});
-		await target.send({content: `${interaction.user.displayName} has deafened you for 60 seconds using their server points!\n[Note: leaving the voice channel before your 60 seconds are up may prevent you from being undeafened. Blame Discord's wonky ah api, not me.]`})
-		target.voice.setDeaf(true, `${interaction.user.displayName} has deafened this person for 60 seconds using their server points!`);
+			var target = await interaction.guild.members.fetch({user: interaction.values[0], force: true});
 
-		SaveUsers(userlist)
+			if(target.voice.channelId == null){
+				await interaction.reply({content: `${target.user.displayName} is not in a voice channel and can not be server muted.`, ephemeral:true})
+				return;
+			}
 
-		setTimeout(function(){
-			target.voice.setDeaf(false);
-			interaction.editReply({content: `60 seconds are up! Undeafening user ${target.user.displayName}.`})
-		}, 60000)
+			await interaction.reply({content: `Deafening user ${target.user.displayName} for 60 seconds!`, ephemeral: true});
+			await target.send({content: `${interaction.user.displayName} has deafened you for 60 seconds using their server points!\n[Note: leaving the voice channel before your 60 seconds are up may prevent you from being undeafened. Blame Discord's wonky ah api, not me.]`})
+			target.voice.setDeaf(true, `${interaction.user.displayName} has deafened this person for 60 seconds using their server points!`);
 
+			SaveUsers(userlist)
+
+			setTimeout(function(){
+				target.voice.setDeaf(false);
+				interaction.editReply({content: `60 seconds are up! Undeafening user ${target.user.displayName}.`})
+			}, 60000)
 
 	}
 
@@ -269,13 +261,13 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setCustomId("nickname")	
 				.setLabel("Enter new nickname for target: ")
 				.setStyle(TextInputStyle.Short)
-				.setValue("username")
+				.setValue("New Nickname")
 				.setMaxLength(32)
 				.setMinLength(3);
 
 			const text2Input = new TextInputBuilder()
 				.setCustomId("targetid")
-				.setLabel("DO NOT CHANGE")
+				.setLabel("DO NOT CHANGE (user ID of your target)")
 				.setStyle(TextInputStyle.Short)
 				.setValue(interaction.values[0])
 
