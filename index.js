@@ -87,6 +87,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	switch(interaction.customId) {
 		case('mutetarget'):
+			console.log("mute redeem selected");
 			cost = 500;
 			if(user.points < cost){
 				pointReject(interaction, user);
@@ -116,6 +117,7 @@ client.on(Events.InteractionCreate, async interaction => {
 			
 		
 		case('deafentarget'):
+			console.log("deafen redeem selected");
 			var cost = 500;
 
 			if(user.points < cost){
