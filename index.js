@@ -114,7 +114,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				target.voice.setMute(false);
 				interaction.editReply({content: `60 seconds are up! Unmuting user ${target.user.displayName}.`})
 			}, 60000)
-			
+			break;
 		
 		case('deafentarget'):
 			console.log("deafen redeem selected");
@@ -145,6 +145,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				target.voice.setDeaf(false);
 				interaction.editReply({content: `60 seconds are up! Undeafening user ${target.user.displayName}.`})
 			}, 60000)
+			break;
 
 	}
 
