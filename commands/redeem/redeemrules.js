@@ -9,7 +9,6 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle(`Rules of Point Redeems`)
-			.setAuthor(`Khaljasper`)
 			.setDescription(`Just to lay out ground rules to prevent exploits and potential arguments from occuring.`)
 			.addFields(
 				{ name: "Rule 1", value: "Targeted redemptions that are not handled automatically by the bot must be completed by the target within 1 hour of the redemption being posted and the user being aware of the redemption. \nPunishment is not currently defined though expect an extreme loss of points or possible terminaton of your Server Points profile."},
