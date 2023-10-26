@@ -21,6 +21,6 @@ module.exports = {
 
 			)	
 			.setTimestamp()
-		await interaction.reply('');
+		await interaction.reply({embeds: [embed]});
 	},
 };
