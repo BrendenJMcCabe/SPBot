@@ -168,7 +168,7 @@ async function UsersWithPointsSelector(ir, str){
 			const menuUser = await ir.guild.members.fetch(obj.name);
 			//console.log(`Attempting to add ${menuUser.user.displayName}`)
 			let newSelection = new StringSelectMenuOptionBuilder()
-			newSelection.setLabel((menuUser.nickname) ? menuUser.nickname : menuUser.user.displayName)
+			newSelection.setLabel(menuUser.user.displayName)
 			newSelection.setValue(obj.name)
 			select.addOptions(newSelection);				
 		}
