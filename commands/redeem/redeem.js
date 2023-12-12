@@ -144,7 +144,7 @@ module.exports = {
 				const menuRow = new ActionRowBuilder()
 					.addComponents(await UsersWithPointsSelector(interaction, "desktarget"));
 
-				await redemption.reply({content: `>>> Cost: 500 Points \nChoose a user who has to show the chat a picture of their desk in it's current state (no cleaing allowed).`, components: [menuRow], ephemeral: true});
+				await redemption.reply({content: `>>> Cost: 500 Points \nChoose a user who has to show the chat a picture of their desk in it's current state.`, components: [menuRow], ephemeral: true});
 				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
 			}
 
