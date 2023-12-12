@@ -47,8 +47,13 @@ module.exports = {
 			.setLabel("Change Nickname")
 			.setStyle(ButtonStyle.Primary);
 
+		const opt8Button = new ButtonBuilder()
+			.setCustomId('desk')
+			.setLabel("Desk Check")
+			.setStyle(ButtonStyle.Primary);
+
 		const row1 = new ActionRowBuilder()
-			.addComponents([opt1Button, opt2Button, opt3Button]);
+			.addComponents([opt1Button, opt2Button, opt3Button, opt8Button]);
 
 		const row2 = new ActionRowBuilder()
 			.addComponents([opt4Button, opt5Button, opt6Button, opt7Button]);
@@ -130,6 +135,16 @@ module.exports = {
 					.addComponents(await UsersWithPointsSelector(interaction, "nicktarget"));
 
 				await redemption.reply({content: `>>> Cost: 1000 Points \nChoose a user to change their server nickname!`, components: [menuRow], ephemeral: true});
+				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
+			}
+
+			if(redemption.customId == 'desk'){
+				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen. Processing request...`, components: [] });
+
+				const menuRow = new ActionRowBuilder()
+					.addComponents(await UsersWithPointsSelector(interaction, "desktarget"));
+
+				await redemption.reply({content: `>>> Cost: 500 Points \nChoose a user who has to show the chat a picture of their desk in it's current state (no cleaing allowed).`, components: [menuRow], ephemeral: true});
 				await interaction.editReply({ content: `**Points: ${user.points}**\nReward chosen.`, components: [] });
 			}
 

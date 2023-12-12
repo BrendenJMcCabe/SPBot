@@ -243,6 +243,29 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	}
 
+	if(interaction.customId === 'desktarget') {
+		var cost = 500;
+
+		if(user.points < cost){
+			pointReject(interaction, user)
+			return;
+		}
+
+		user.points -= cost;
+		pot.points += cost;
+
+		var target = await interaction.guild.members.fetch({user: interaction.values[0], force: true});
+		try{
+			await interaction.reply(`${target.user}, Desk check! ${interaction.user.displayName} says to take a picture of your desk and send it to the chat right now. No cleaning allowed!`);
+		} catch(e){
+			await interaction.reply({content: `Oops! Something went wrong!`, ephemeral:true})
+			return;
+		}
+		
+		SaveUsers(userlist)
+
+	}
+
 	if(interaction.customId === 'nicktarget'){
 		var cost = 1000;
 
